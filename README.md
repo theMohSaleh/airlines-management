@@ -56,13 +56,10 @@ A full-stack website with user authentication and authorization for managing and
 ### Pseudo code
 - Add links to new routes in the landing page
 
--------
 - Adjust users module and add isAdmin property
--------
 
 - Create flights module
 
--------
 #### Create the controllers
 - Create flight routes
     - flights index - GET
@@ -72,7 +69,6 @@ A full-stack website with user authentication and authorization for managing and
     - flgihts edit page - GET
     - flgihts update - PUT
     - flgihts delete - DELETE
--------
 
 - Create user routes
 	- user index - GET
@@ -80,39 +76,39 @@ A full-stack website with user authentication and authorization for managing and
 	- user edit page - GET
 	- user update - PUT
 	- user delete - DELETE
--------
+
 - Build Index functionality
 	- retrieve list of all items from database
 	- create index page and pass list of items to it
 	- display resource on index page
--------
+
 - Build Add functionality
 	- create add page
 	- send request to database on post request
 	- send user to resource index
--------
+
 - Build Show functionality
 	- create show page
 
 	- get id of resource and retrieve information from database and send it to show page
 	- display data on show page
 	- send user to resource index
--------
+
 - Build Edit functionality
 	- create edit page (similar to add page)
 	- get id of resource and retrieve information from database and send it to edit page
 	- set value of fields to the form from passed in data
 	- override form with PUT request to update information of the resource
 	- send user to resource index
--------
+
 - Build Delete functionality
 	- get id of item and retrieve resource passed into a variable
 	- send delete request to the database to delete resource
 	- send user to resource index
--------
+
 - Error-handling
 	- respond with an error page when any CURD function fails
--------
+
 - Style application
 ## Routes
 ### User routes
