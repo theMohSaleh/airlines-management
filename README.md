@@ -6,8 +6,9 @@ A full-stack website with user authentication and authorization for managing and
 ### ERD Diagram
 ![ERD Diagram](./assets/ERD.png)
 
-### Mockups
 
+### Mockups
+---
 #### Landing Page
 ![Landing Page](./assets/landing-page.png)
 #### View Flights List Page
@@ -21,8 +22,9 @@ A full-stack website with user authentication and authorization for managing and
 #### Edit Flight Page
 ![Edit Flight](./assets/edit-flight.png)
 
-### Data Models
 
+### Data Models
+---
 #### The ```User``` schema
 
 | Property | Type     | Required | Description          |
@@ -54,13 +56,13 @@ A full-stack website with user authentication and authorization for managing and
 - AAA, I need to be able to view a list of flights created by a specific admin user. This can be done by clicking on their name from either the users dashboard if they're an admin user or from the flights list.
 
 ### Pseudo code
-- Add links to new routes in the landing page
+#### 1. Add links to new routes in the landing page
 
-- Adjust users module and add isAdmin property
+#### 2. Adjust users module and add isAdmin property
 
-- Create flights module
+#### 3. Create flights module
 
-#### Create the controllers
+#### 4. Create the controllers and views
 - Create flight routes
     - flights index - GET
     - flights add page - GET
@@ -106,10 +108,16 @@ A full-stack website with user authentication and authorization for managing and
 	- send delete request to the database to delete resource
 	- send user to resource index
 
-- Error-handling
-	- respond with an error page when any CURD function fails
+#### 5. Error-handling
+- respond with an error page when any CURD function fails
 
-- Style application
+#### 6. Style application
+Add Styling for
+- Nabvar
+- Landing page
+- Flight Index, Add, Edit, Delete
+- User Index, Edit
+
 ## Routes
 ### User routes
 | Action | Route                                   | HTTP Verb |
