@@ -39,6 +39,7 @@ router.post('/sign-up', async (req, res) => {
     req.session.user = {
         username: newUser.username,
         id_: newUser._id,
+        isAdmin: newUser.isAdmin,
     }
 
     // send user back to home page
@@ -76,6 +77,7 @@ router.post('/sign-in', async (req, res) => {
     req.session.user = {
         username: user.username,
         id_: user._id,
+        isAdmin: user.isAdmin,
     }
 
     // send user back to home page

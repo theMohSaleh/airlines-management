@@ -5,12 +5,14 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const AddUserToViews = require('./middleware/addUserToViews.js');
 const isSignedIn = require("./middleware/is-signed-in.js");
+const path = require('path');
 require("dotenv").config();
 require('./config/database')
 
 // Controllers 
 
 const authController = require("./controllers/auth.js");
+const flightsController = require("./controllers/flights.js");
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -44,14 +47,11 @@ app.use("/auth", authController);
 
 app.use(AddUserToViews);
 
-
-// Public Routes
+// Routes
 
 // GET /
 app.get("/", async (req, res) => {
     res.render("index.ejs");
 });
 
-// Protected Routes
-
-app.use(isSignedIn);
+app.use("/flights", isSignedIn, flightsController);
