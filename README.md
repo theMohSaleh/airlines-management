@@ -22,7 +22,6 @@ A full-stack website with user authentication and authorization for managing and
 
 
 ## Data Models
----
 ### The ```User``` schema
 
 | Property | Type     | Required | Description          |

@@ -55,12 +55,3 @@ app.get("/", async (req, res) => {
 // Protected Routes
 
 app.use(isSignedIn);
-
-app.get("/vip-lounge", (req, res) => {
-    if (req.session.user) {
-        res.send(`Welcome to the party ${req.session.user.username}.`);
-    } else {
-        res.sendStatus(404);
-        // res.send("Sorry, no guests allowed.");
-    }
-});

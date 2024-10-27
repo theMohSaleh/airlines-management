@@ -32,7 +32,7 @@ router.post('/sign-up', async (req, res) => {
     // create user in database
     // -b make the password secure
     const hashPassword = authConfig.encryptPassword(password);
-    const payload = { username, password: hashPassword }
+    const payload = { username, password: hashPassword, isAdmin: false }
     const newUser = await User.create(payload);
 
     // respond back to the browser with created user signed in
