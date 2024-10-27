@@ -2,30 +2,28 @@
 
 A full-stack website with user authentication and authorization for managing and booking flights. The main features of this website is to add, view, edit and delete flights as an admin user. Then the normal user will be able to view currently added flights and their details and book for them.
 
-## ERD, Mockups and Data Schema
-### ERD Diagram
+## ERD Diagram
 ![ERD Diagram](./assets/ERD.png)
 
 
-### Mockups
----
-#### Landing Page
+## Mockups
+### Landing Page
 ![Landing Page](./assets/landing-page.png)
-#### View Flights List Page
+### View Flights List Page
 ![View Flights](./assets/view-flights.png)
-#### View Flight Information Page
+### View Flight Information Page
 ![View Flight Information](./assets/flight-show.png)
-#### Users Dashboard Page
+### Users Dashboard Page
 ![Users Dashboard](./assets/user-dashboard.png)
-#### Add Flight Page
+### Add Flight Page
 ![Add Flight](./assets/add-flight.png)
-#### Edit Flight Page
+### Edit Flight Page
 ![Edit Flight](./assets/edit-flight.png)
 
 
-### Data Models
+## Data Models
 ---
-#### The ```User``` schema
+### The ```User``` schema
 
 | Property | Type     | Required | Description          |
 |----------|----------|----------|----------------------|
@@ -33,7 +31,7 @@ A full-stack website with user authentication and authorization for managing and
 | password | String | true | The password for the account used for logging in.|
 | isAdmin | Boolean | true | Determines the privileges for this account.|
 
-#### The ```Flight``` schema
+### The ```Flight``` schema
 
 | Property | Type     | Required | Description          |
 |----------|----------|----------|----------------------|
@@ -45,8 +43,7 @@ A full-stack website with user authentication and authorization for managing and
 | owner | ObjectId | true | The reference id for the admin who created this flight.|
 | bookedByUsers | [ ObjectId ] | false | A list of reference for users who booked this flight.|
 
-## User stories and planning
-### User Stories
+## User Stories
 - As a User (AAU), I should be able to sign up for an account and/or sign in with an account before I can view and book for flights.
 - AAU, I want to be able to see all current flights and book for a flight, Which should clearly show me that I have successfully booked for this flight.
 - AAU, I should be able to view a list of all the flights I have booked for and be able to click on a flight to view its related information.
@@ -55,14 +52,14 @@ A full-stack website with user authentication and authorization for managing and
 - AAA, I should be able to create, view, edit and delete flights that I have created, as well as view flights created by other users.
 - AAA, I need to be able to view a list of flights created by a specific admin user. This can be done by clicking on their name from either the users dashboard if they're an admin user or from the flights list.
 
-### Pseudo code
-#### 1. Add links to new routes in the landing page
+## Pseudo code
+### 1. Add links to new routes in the landing page
 
-#### 2. Adjust users module and add isAdmin property
+### 2. Adjust users module and add isAdmin property
 
-#### 3. Create flights module
+### 3. Create flights module
 
-#### 4. Create the controllers and views
+### 4. Create the controllers and views
 - Create flight routes
     - flights index - GET
     - flights add page - GET
@@ -108,10 +105,10 @@ A full-stack website with user authentication and authorization for managing and
 	- send delete request to the database to delete resource
 	- send user to resource index
 
-#### 5. Error-handling
+### 5. Error-handling
 - respond with an error page when any CURD function fails
 
-#### 6. Style application
+### 6. Style application
 Add Styling for
 - Nabvar
 - Landing page
