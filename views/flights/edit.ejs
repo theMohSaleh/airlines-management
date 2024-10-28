@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <title>Editing <%= flight.destination %></title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1 class="title is-1" >Edit Flight</h1>
+  <form action="/flights" method="POST">
+    <label for="departure">Departure</label>
+    <input class="input" type="text" name="departure" id="departure" value="<%= flight.departure %>" required>
+    <label for="destination">Destination</label>
+    <input class="input" type="text" name="destination" id="destination" value="<%= flight.destination %>" required>
+    <label for="capacity">Capacity</label>
+    <input class="input" type="number" name="capacity" id="capacity" value="<%= flight.capacity %>" required>
+    <label for="date">Date</label>
+    <input class="input" type="datetime-local" name="date" id="date" value="<%= flight.formattedDate %>" required>
+    <label for="price">Price</label>
+    <input class="input is-small" type="number" name="price" id="price" value="<%= flight.price %>" required>
+    <br><br>
+    <button class="button" type="submit">Add Flight</button>
+  </form>
+</body>
+
+</html>
