@@ -38,7 +38,7 @@ router.post('/sign-up', async (req, res) => {
     // respond back to the browser with created user signed in
     req.session.user = {
         username: newUser.username,
-        id_: newUser._id,
+        _id: newUser._id,
         isAdmin: newUser.isAdmin,
     }
 
@@ -76,7 +76,7 @@ router.post('/sign-in', async (req, res) => {
     // create a session cookie
     req.session.user = {
         username: user.username,
-        id_: user._id,
+        _id: user._id,
         isAdmin: user.isAdmin,
     }
 

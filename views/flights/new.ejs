@@ -10,19 +10,20 @@
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Add New Flight</h1>
+  <h1 class="title is-1" >Add New Flight</h1>
   <form action="/flights" method="POST">
     <label for="departure">Departure</label>
-    <input type="text" name="departure" id="departure">
+    <input class="input" type="text" name="departure" id="departure" required>
     <label for="destination">Destination</label>
-    <input type="text" name="destination" id="destination">
+    <input class="input" type="text" name="destination" id="destination" required>
     <label for="capacity">Capacity</label>
-    <input type="text" name="capacity" id="capacity">
+    <input class="input" type="number" name="capacity" id="capacity" required>
     <label for="date">Date</label>
-    <input type="text" name="date" id="date">
+    <input class="input" type="datetime-local" name="date" id="date" required>
     <label for="price">Price</label>
-    <input type="text" name="price" id="price">
-    <button type="submit">Add Flight</button>
+    <input class="input is-small" type="number" name="price" id="price" required>
+    <br><br>
+    <button class="button" type="submit">Add Flight</button>
   </form>
 </body>
 

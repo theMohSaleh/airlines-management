@@ -14,8 +14,26 @@ router.get('/', async (req, res) => {
     }
 })
 
+// GET - new flight page
 router.get('/new', (req, res) => {
     res.render('flights/new.ejs');
+})
+
+// POST - create flight 
+router.post('/', async (req, res) => {
+    try {
+        const formData = req.body;
+        
+        // assign logged in user as owner
+        formData.owner = req.session.user._id;
+
+        await Flight.create(formData)
+
+        res.redirect('/flights')
+    } catch (error) {
+        console.log('Error: ', error);
+        res.redirect("/");
+    }
 })
 
 module.exports = router;
