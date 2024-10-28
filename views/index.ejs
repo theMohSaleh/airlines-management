@@ -13,9 +13,12 @@
 <body>
   <%- include('./partials/_navbar.ejs') %>
   <% if (user) { %>
-  <h1>Welcome to the app, <%= user.username %>!</h1>
+  <h1 class="is-size-1 has-text-centered mt-5">Welcome to the app, <%= user.username %>!</h1>
+  <figure class="image is-16by9 mt-5 is-clipped">
+    <img src="/images/landing.jpg" alt="home image">
+  </figure>
   <% } else { %>
-  <h1>Welcome to the app, guest.</h1>
+  <h1 class="is-size-1 has-text-centered mt-5">Welcome to the app, guest.</h1>
   <% } %>
 </body>
 

@@ -5,6 +5,7 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const AddUserToViews = require('./middleware/addUserToViews.js');
 const isSignedIn = require("./middleware/is-signed-in.js");
+const isAdminUser = require("./middleware/is-admin.js");
 const path = require('path');
 require("dotenv").config();
 require('./config/database')
@@ -13,6 +14,8 @@ require('./config/database')
 
 const authController = require("./controllers/auth.js");
 const flightsController = require("./controllers/flights.js");
+const profilesController = require("./controllers/profiles.js");
+const usersController = require("./controllers/users.js");
 
 const app = express();
 
@@ -55,3 +58,5 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/flights", isSignedIn, flightsController);
+app.use("/profiles", isSignedIn, profilesController);
+app.use("/users", isSignedIn, isAdminUser, usersController);

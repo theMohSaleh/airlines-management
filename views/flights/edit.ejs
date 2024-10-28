@@ -10,7 +10,7 @@
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1 class="title is-1" >Edit Flight</h1>
+  <h1 class="title is-1">Edit Flight</h1>
   <form action="/flights/<%= flight._id %>?_method=PUT" method="POST">
     <label for="departure">Departure</label>
     <input class="input" type="text" name="departure" id="departure" value="<%= flight.departure %>" required>

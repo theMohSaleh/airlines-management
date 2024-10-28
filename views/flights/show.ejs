@@ -15,10 +15,27 @@
   <p>Date: <%= flight.date.toLocaleString(); %></p>
   <p>Capacity: <%= flight.capacity %> </p>
   <p>Price: <%= flight.price %> </p>
+  <% if (user.isAdmin) { %>
   <a class="button" href="/flights/<%= flight.id %>/edit">Edit Flight</a>
   <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
     <button class="button is-danger" type="submit">Delete Flight</button>
   </form>
+  <% } %>
+  <% const remainingSeats = flight.capacity - flight.bookedByUsers.length; %>
+  <h2>Remaining Seats: <%= remainingSeats %></h2>
+  <% if (userHasBooked) { %>
+  <form action="/flights/<%= flight._id %>/booked-by/<%= user._id %>?_method=DELETE" method="POST">
+    <button class="button is-danger" type="submit">Cancel Booking</button>
+  </form>
+  <% } else { %>
+  <% if ( remainingSeats === 0 ) { %>
+  <p>No more seats are currnetly available.</p>
+  <% } else { %>
+  <form action="/flights/<%= flight._id %>/booked-by/<%= user._id %>" method="POST">
+    <button class="button is-info" type="submit">Book This Flight!</button>
+  </form>
+  <% } %>
+  <% } %>
 </body>
 
 </html>
