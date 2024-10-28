@@ -10,11 +10,12 @@
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <ul>
-    <li>
-      flight
-    </li>
-  </ul>
+  <h1>List of Flights</h1>
+  <% flights.forEach((flight) => { %>
+  <a href="/flights/<%= flight._id %>"><%= flight.departure %> airport - <%= flight.destination %> airport</a>
+  <p><%= flight.date %></p>
+  <% }) %>
+  <a href="/flights/new">Add New Flight</a>
 </body>
 
 </html>

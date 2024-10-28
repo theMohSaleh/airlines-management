@@ -6,14 +6,16 @@ const Flight = require('../models/flight');
 // GET - index page
 router.get('/', async (req, res) => {
     try {
-        const flights = Flight.find({})
-        res.render('flights/index.ejs', flights)
+        const flights = await Flight.find({})
+        res.render('flights/index.ejs', { flights } )
     } catch (error) {
         console.log('Error: ', error);
         res.redirect("/");
     }
 })
 
-
+router.get('/new', (req, res) => {
+    res.render('flights/new.ejs');
+})
 
 module.exports = router;

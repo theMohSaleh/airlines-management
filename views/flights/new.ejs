@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <title>Add Flight</title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Add New Flight</h1>
+  <form action="/flights" method="POST">
+    <label for="departure">Departure</label>
+    <input type="text" name="departure" id="departure">
+    <label for="destination">Destination</label>
+    <input type="text" name="destination" id="destination">
+    <label for="capacity">Capacity</label>
+    <input type="text" name="capacity" id="capacity">
+    <label for="date">Date</label>
+    <input type="text" name="date" id="date">
+    <label for="price">Price</label>
+    <input type="text" name="price" id="price">
+    <button type="submit">Add Flight</button>
+  </form>
+</body>
+
+</html>
