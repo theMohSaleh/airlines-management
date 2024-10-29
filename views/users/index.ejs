@@ -10,10 +10,40 @@
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>List of Users</h1>
-  <% users.forEach((users) => { %>
-  <a href="/users/<%= users._id %>"><%= users.username %></a>
-  <% }) %>
+  <h1 class="is-size-1 has-text-centered mt-5 mb-5" >List of Users</h1>
+  <div class="is-flex is-justify-content-center is-justify-content-space-around">
+  <% users.forEach((loopUser) => { %>  <!-- variable is named loopUser since user variable is passed into the view as logged in user -->
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-centered"><%= loopUser.username %></p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <% if (loopUser.isAdmin) { %>
+              <p>This is an admin account</p>
+            <% } else { %>
+              <p>Not an admin account</p>
+            <% } %>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <% if (loopUser.isAdmin) { %>
+            <form class="card-footer-item" action="/users/<%= loopUser._id %>/adminRole?_method=DELETE" method="POST">
+              <button type="submit">
+                <strong class="has-text-danger">Remove Admin</strong>
+              </button>
+            </form>
+            <% } else { %>
+              <form class="card-footer-item" action="/users/<%= loopUser._id %>/adminRole" method="POST">
+                <button type="submit">
+                  <strong class="has-text-link">Make Admin</strong>
+                </button>
+              </form>
+          <% } %>
+        </footer>
+      </div>
+    <% }) %>
+  </div>
 </body>
 
 </html>

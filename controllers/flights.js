@@ -1,3 +1,4 @@
+// flights controller - handle creating, editing and removing flights. Also handle booking flights or cancel booking
 const express = require('express');
 const router = express.Router();
 const { formatISO } = require('date-fns');
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
         res.render('flights/index.ejs', { flights })
     } catch (error) {
         console.log('Error: ', error);
-        res.redirect("/");
+        res.render('errors/notFound.ejs')
     }
 })
 
@@ -19,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/new', (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
-        res.redirect('/')
+        res.render('errors/notFound.ejs');
         return;
     }
     res.render('flights/new.ejs');
@@ -29,46 +30,50 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
-        res.redirect('/')
+        res.render('errors/notFound.ejs');
         return;
     }
     try {
         const formData = req.body;
-        
+
         // assign logged in user as owner
         formData.owner = req.session.user._id;
-        
+
         await Flight.create(formData)
-        
+
         res.redirect('/flights')
     } catch (error) {
         console.log('Error: ', error);
-        res.redirect("/");
+        res.render('errors/notFound.ejs')
     }
 })
 
 // GET - show flight page
 router.get('/:flightId', async (req, res) => {
-    const flightId = req.params.flightId;
-    const flight = await Flight.findById(flightId);
-    
-    const userHasBooked = flight.bookedByUsers.some((user) =>
-        user.equals(req.session.user._id)
-);
+    try {
+        const flightId = req.params.flightId;
+        const flight = await Flight.findById(flightId);
 
-res.render('flights/show.ejs', { flight, userHasBooked });
+        const userHasBooked = flight.bookedByUsers.some((user) =>
+            user.equals(req.session.user._id)
+        );
+        res.render('flights/show.ejs', { flight, userHasBooked });
+    } catch (error) {
+        console.log(error);
+        res.render('errors/notFound.ejs')
+    }
 })
 
 // DELETE - remove flight (ADMIN)
 router.delete('/:flightId', async (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
-        res.redirect('/')
+        res.render('errors/notFound.ejs');
         return;
     }
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
-    
+
     if (flight.owner.equals(req.session.user._id)) {
         await flight.deleteOne();
         res.redirect('/flights');
@@ -81,17 +86,17 @@ router.delete('/:flightId', async (req, res) => {
 router.get('/:flightId/edit', async (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
-        res.redirect('/')
+        res.render('errors/notFound.ejs');
         return;
     }
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
     // get date as string
     const dateString = formatISO(flight.date);
-    
+
     // remove the milliseconds and timezone from the date so it can be assigned in the input field as a value
     const formattedDate = dateString.substring(0, dateString.indexOf(':00+03:00'));
-    
+
     // assign formattedDate to flight variable
     flight.formattedDate = formattedDate;
     res.render('flights/edit.ejs', { flight });
@@ -101,7 +106,7 @@ router.get('/:flightId/edit', async (req, res) => {
 router.put('/:flightId', async (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
-        res.redirect('/')
+        res.render('errors/notFound.ejs');
         return;
     }
     try {
@@ -114,7 +119,7 @@ router.put('/:flightId', async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.redirect('/');
+        res.render('errors/notFound.ejs')
     }
 });
 
@@ -136,7 +141,7 @@ router.post('/:flightId/booked-by/:userId', async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.redirect('/');
+        res.render('errors/notFound.ejs');
     }
 });
 
@@ -149,7 +154,7 @@ router.delete('/:flightId/booked-by/:userId', async (req, res) => {
         res.redirect(`/flights/${req.params.flightId}`);
     } catch (error) {
         console.log(error);
-        res.redirect('/');
+        res.render('errors/notFound.ejs')
     }
 });
 

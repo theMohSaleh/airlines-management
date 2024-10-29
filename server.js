@@ -60,3 +60,7 @@ app.get("/", async (req, res) => {
 app.use("/flights", isSignedIn, flightsController);
 app.use("/profiles", isSignedIn, profilesController);
 app.use("/users", isSignedIn, isAdminUser, usersController);
+
+app.all('*', (req, res) => {
+    res.render('errors/notFound.ejs');
+})

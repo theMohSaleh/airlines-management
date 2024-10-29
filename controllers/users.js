@@ -1,3 +1,4 @@
+// users controller - viewing and managing users (ADMIN)
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
@@ -10,6 +11,35 @@ router.get('/', async (req, res) => {
         console.log(error);
         res.redirect('/');
     }
-});
+})
+
+router.post('/:idOfUser/adminRole', async (req, res) => {
+    try {
+        const paramUserId = req.params.idOfUser;
+        const userFound = await User.findById(paramUserId);
+        console.log(paramUserId);
+        console.log(userFound);
+        
+        userFound.isAdmin = true;
+        await userFound.save();
+        res.redirect('/users')        
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+})
+
+router.delete('/:userId/adminRole', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const user = await User.findById({_id: userId});
+        user.isAdmin = false;
+        await user.save();
+        res.redirect('/users')        
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+})
 
 module.exports = router;

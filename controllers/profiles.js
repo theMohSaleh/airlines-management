@@ -1,3 +1,4 @@
+// profiles controller - viewing user's booked flights
 const express = require('express');
 const router = express.Router();
 const Flight = require('../models/flight.js');
