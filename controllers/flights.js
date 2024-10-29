@@ -15,21 +15,31 @@ router.get('/', async (req, res) => {
     }
 })
 
-// GET - new flight page
+// GET - new flight page (ADMIN)
 router.get('/new', (req, res) => {
+    // if user is not admin, redirect to home page and stop process
+    if (isAdminUser(req.session.user) === false) {
+        res.redirect('/')
+        return;
+    }
     res.render('flights/new.ejs');
 })
 
-// POST - create flight 
+// POST - create flight (ADMIN)
 router.post('/', async (req, res) => {
+    // if user is not admin, redirect to home page and stop process
+    if (isAdminUser(req.session.user) === false) {
+        res.redirect('/')
+        return;
+    }
     try {
         const formData = req.body;
-
+        
         // assign logged in user as owner
         formData.owner = req.session.user._id;
-
+        
         await Flight.create(formData)
-
+        
         res.redirect('/flights')
     } catch (error) {
         console.log('Error: ', error);
@@ -41,18 +51,24 @@ router.post('/', async (req, res) => {
 router.get('/:flightId', async (req, res) => {
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
-
+    
     const userHasBooked = flight.bookedByUsers.some((user) =>
         user.equals(req.session.user._id)
-    );
+);
 
-    res.render('flights/show.ejs', { flight, userHasBooked });
+res.render('flights/show.ejs', { flight, userHasBooked });
 })
 
+// DELETE - remove flight (ADMIN)
 router.delete('/:flightId', async (req, res) => {
+    // if user is not admin, redirect to home page and stop process
+    if (isAdminUser(req.session.user) === false) {
+        res.redirect('/')
+        return;
+    }
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
-
+    
     if (flight.owner.equals(req.session.user._id)) {
         await flight.deleteOne();
         res.redirect('/flights');
@@ -61,23 +77,33 @@ router.delete('/:flightId', async (req, res) => {
     }
 })
 
-// GET - edit flight page
+// GET - edit flight page (ADMIN)
 router.get('/:flightId/edit', async (req, res) => {
+    // if user is not admin, redirect to home page and stop process
+    if (isAdminUser(req.session.user) === false) {
+        res.redirect('/')
+        return;
+    }
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
     // get date as string
     const dateString = formatISO(flight.date);
-
+    
     // remove the milliseconds and timezone from the date so it can be assigned in the input field as a value
     const formattedDate = dateString.substring(0, dateString.indexOf(':00+03:00'));
-
+    
     // assign formattedDate to flight variable
     flight.formattedDate = formattedDate;
     res.render('flights/edit.ejs', { flight });
 })
 
-// PUT - update flight details
+// PUT - update flight details (ADMIN)
 router.put('/:flightId', async (req, res) => {
+    // if user is not admin, redirect to home page and stop process
+    if (isAdminUser(req.session.user) === false) {
+        res.redirect('/')
+        return;
+    }
     try {
         const flight = await Flight.findById(req.params.flightId);
         if (flight.owner.equals(req.session.user._id)) {
@@ -126,5 +152,12 @@ router.delete('/:flightId/booked-by/:userId', async (req, res) => {
         res.redirect('/');
     }
 });
+
+// function to check if user is admin
+function isAdminUser(user) {
+    if (user.isAdmin === false) {
+        return false;
+    }
+}
 
 module.exports = router;

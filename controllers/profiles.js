@@ -4,6 +4,7 @@ const Flight = require('../models/flight.js');
 
 router.get('/', async (req, res) => {
     try {
+        // get all flights the user has booked
         const myBookedFlights = await Flight.find({
             bookedByUsers: { $in: req.session.user._id },
         }).populate('owner');
