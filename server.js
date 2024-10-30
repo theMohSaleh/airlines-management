@@ -46,7 +46,6 @@ app.use(
     })
 );
 
-app.use("/auth", authController);
 
 app.use(AddUserToViews);
 
@@ -57,6 +56,7 @@ app.get("/", async (req, res) => {
     res.render("index.ejs");
 });
 
+app.use("/auth", authController);
 app.use("/flights", isSignedIn, flightsController);
 app.use("/profiles", isSignedIn, profilesController);
 app.use("/users", isSignedIn, isAdminUser, usersController);

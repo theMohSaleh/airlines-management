@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
-  </head>
-  <body>
-    <h1>Login with your account!</h1>
-    <form action="/auth/sign-in" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
-      <button type="submit">Sign up</button>
-    </form>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <title>Sign Up</title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+    <div class="container is-max-desktop">
+      <h1 class="is-size-2 mt-5 mb-5 has-text-centered">Login with your account!</h1>
+      <form class="box is-flex is-flex-direction-column" action="/auth/sign-in" method="POST">
+        <div class="field">
+          <label class="label" for="username">Username:</label>
+          <div class="control">
+            <input class="input" type="text" name="username" id="username" />
+          </div>
+        </div>
+        <div class="field mt-2">
+          <label class="label" for="password">Password:</label>
+          <div class="control">
+            <input class="input" type="password" name="password" id="password" />
+          </div>
+        </div>
+        <div></div>
+        <div class="field mt-2 is-grouped is-align-items-center">
+          <div class="control">
+            <button class="button is-primary py-2 px-5" type="submit">Login</button>
+          </div>
+          <div class="control align">
+            <p>Don't have an account? <a href="/auth//sign-up">Sign up here.</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+</body>
+
 </html>
