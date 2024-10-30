@@ -76,12 +76,9 @@ router.delete('/:flightId', async (req, res) => {
     const flightId = req.params.flightId;
     const flight = await Flight.findById(flightId);
 
-    if (flight.owner.equals(req.session.user._id)) {
-        await flight.deleteOne();
-        res.redirect('/flights');
-    } else {
-        res.send("You don't have permission to do that");
-    }
+    await flight.deleteOne();
+    res.redirect('/flights');
+
 })
 
 // GET - edit flight page (ADMIN)
@@ -113,12 +110,9 @@ router.put('/:flightId', async (req, res) => {
     }
     try {
         const flight = await Flight.findById(req.params.flightId);
-        if (flight.owner.equals(req.session.user._id)) {
             await flight.updateOne(req.body)
             res.redirect('/flights')
-        } else {
-            res.send("You don't have permission to do that.");
-        }
+
     } catch (error) {
         console.log(error);
         res.render('errors/notFound.ejs')

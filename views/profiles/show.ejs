@@ -5,24 +5,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <title>My Profile</title>
 </head>
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <div>
-    <h1>Profile</h1>
-    <p>
-      You have
-      <%= myBookedFlights.length %>
-      <%= myBookedFlights.length===1 ? 'Flight' : 'Flights' %>
-    </p>
-    <div>
-      <% myBookedFlights.forEach((flight)=> { %>
-      <a href="/flights/<%= flight._id %>">
-        <h4><%= flight.departure %> Flight</h4>
-      </a>
-      <% }) %>
+  <div class="is-flex">
+    <div class="container block ml-6">
+      <div class="is-flex is-flex-direction-column">
+        <div class="is-flex is-justify-content-center is-align-items-center">
+          <% if (user.isAdmin) { %>
+          <h1 class="is-size-2 mt-5 mb-5 title"> My Booked Flights</h1>
+          <a class="button is-primary mx-3" href="/flights/new">Add New Flight</a>
+          <% } else { %>
+          <h1 class="is-size-1 has-text-centered mt-5 mb-5"> List of Flights </h1>
+          <% } %>
+        </div>
+      </div>
+      <p class="has-text-centered is-size-4 mb-3 title">
+        You have booked
+        <%= myBookedFlights.length %>
+        <%= myBookedFlights.length===1 ? 'Flight' : 'Flights' %>
+      </p>
+      <div class="is-flex is-flex-direction-column is-align-items-center has-text-centered">
+        <% myBookedFlights.forEach((flight)=> { %>
+        <div class="card flight-card my-2 clickable">
+          <a href="/flights/<%= flight._id %>">
+            <div class="mx-3">
+              <p class="card-header-title is-centered"><%= flight.departure %> — <%= flight.destination %></p>
+            </div>
+            <div class="mx-3">
+              <p class="pb-3">
+                <strong><%= flight.date.toLocaleString(); %></strong>
+              </p>
+            </div>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <div class="container is-max-desktop vertical-image-flights">
+      <figure class="image is-9by16">
+        <img src="/images/vertical-image3.jpg" alt="vertical-image...">
+      </figure>
     </div>
   </div>
 </body>

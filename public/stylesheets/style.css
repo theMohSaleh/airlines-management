@@ -9,5 +9,24 @@
 }
 
 .flight-card {
-    width: 400px;
+    width: 600px;
+}
+
+.flight-details {
+    height: 150px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000000;
+    margin: 1em 0;
+    padding: 0;
+}
+
+@media (max-width:1000px) {
+    .flight-card {
+        width: 250px;
+    }
 }

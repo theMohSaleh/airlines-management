@@ -5,37 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <title><%= flight.destination %></title>
 </head>
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Flight details</h1>
-  <p><%= flight.departure %> airport - <%= flight.destination %> airport</p>
-  <p>Date: <%= flight.date.toLocaleString(); %></p>
-  <p>Capacity: <%= flight.capacity %> </p>
-  <p>Price: <%= flight.price %> </p>
+  <div class="container">
+  <h1 class="title has-text-centered mt-5">Flight details</h1>
+  <p class="title is-size-5 has-text-centered mb-5"><%= flight.departure %> — <%= flight.destination %></p>
+  <hr>
+  <div class="is-flex is-flex-direction-column is-justify-content-space-evenly flight-details">
+  <p>Date and Time: <strong><%= flight.date.toLocaleString(); %></strong></p>
+  <p>Seats Capacity: <strong><%= flight.capacity %></strong></p>
+  <p>Price in BD: <strong><%= flight.price %></strong></p>
+  <% const remainingSeats = flight.capacity - flight.bookedByUsers.length; %>
+  <p>Remaining Seats: <strong><%= remainingSeats %></strong></p>
+</div>
+<div class="buttons">
   <% if (user.isAdmin) { %>
     <a class="button" href="/flights/<%= flight.id %>/edit">Edit Flight</a>
     <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
       <button class="button is-danger" type="submit">Delete Flight</button>
     </form>
   <% } %>
-  <% const remainingSeats = flight.capacity - flight.bookedByUsers.length; %>
-  <h2>Remaining Seats: <%= remainingSeats %></h2>
   <% if (userHasBooked) { %>
   <form action="/flights/<%= flight._id %>/booked-by/<%= user._id %>?_method=DELETE" method="POST">
     <button class="button is-danger" type="submit">Cancel Booking</button>
   </form>
   <% } else { %>
   <% if ( remainingSeats === 0 ) { %>
-  <p>No more seats are currnetly available.</p>
+  <p class="has-text-weight-medium is-underlined">No more seats are currnetly available.</p>
   <% } else { %>
   <form action="/flights/<%= flight._id %>/booked-by/<%= user._id %>" method="POST">
     <button class="button is-info" type="submit">Book This Flight!</button>
   </form>
   <% } %>
   <% } %>
+</div>
+</div>
 </body>
 
 </html>
