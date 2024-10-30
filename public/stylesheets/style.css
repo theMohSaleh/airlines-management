@@ -1,0 +1,13 @@
+.vertical-image-flights {
+    min-width: 30%;
+    max-width: 30%;
+}
+
+.clickable:hover {
+    background-color: rgb(225, 223, 223);
+    transition: 0.2s;
+}
+
+.flight-card {
+    width: 400px;
+}

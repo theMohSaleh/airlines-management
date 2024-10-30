@@ -33,6 +33,9 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
+          <% if (user && user.isAdmin) { %>
+            <a class="button is-link is-light operationButton" href="/flights/new">Add New Flight</a>
+          <% } %>
           <a href="/profiles" class="button is-primary">
             <strong>Profile</strong>
           </a>
