@@ -5,17 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <script defer src="/javascripts/getAirportData.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
   <title>Add Flight</title>
 </head>
 
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1 class="title is-1">Add New Flight</h1>
-  <form action="/flights" method="POST">
+  <form action="/flights" method="POST" autocomplete="off">
     <label for="departure">Departure</label>
-    <input class="input" type="text" name="departure" id="departure" required>
+    <input class="input" type="text" name="departure" id="departure" list="airportsData" required>
     <label for="destination">Destination</label>
-    <input class="input" type="text" name="destination" id="destination" required>
+    <input class="input" type="text" name="destination" id="destination" list="airportsData" required>
     <label for="capacity">Capacity</label>
     <input class="input" type="number" name="capacity" id="capacity" required>
     <label for="date">Date</label>
@@ -25,6 +27,8 @@
     <br><br>
     <button class="button" type="submit">Add Flight</button>
   </form>
+  <datalist id="airportsData">
+  </datalist>
 </body>
 
 </html>

@@ -29,7 +29,7 @@
         <footer class="card-footer">
           <% if (loopUser.isAdmin) { %>
             <form class="card-footer-item" action="/users/<%= loopUser._id %>/adminRole?_method=DELETE" method="POST">
-              <button type="submit">
+              <button type="submit" <%= loopUser._id.toString() === user._id ? 'disabled' : '' %>> <!-- disable button this is logged in user account -->
                 <strong class="has-text-danger">Remove Admin</strong>
               </button>
             </form>

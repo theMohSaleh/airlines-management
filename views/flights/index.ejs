@@ -19,7 +19,7 @@
     <div class="container block ml-6">
       <h1 class="is-size-1 has-text-centered mt-5 mb-5">List of Flights</h1>
       <% flights.forEach((flight) => { %>
-      <a href="/flights/<%= flight._id %>"><%= flight.departure %> airport - <%= flight.destination %> airport</a>
+      <a href="/flights/<%= flight._id %>"><%= flight.departure %> — <%= flight.destination %></a>
       <p><%= flight.date.toLocaleString(); %></p>
       <% }) %>
       <% if (user.isAdmin) { %>

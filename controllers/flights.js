@@ -1,5 +1,6 @@
 // flights controller - handle creating, editing and removing flights. Also handle booking flights or cancel booking
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 const { formatISO } = require('date-fns');
 
@@ -17,12 +18,13 @@ router.get('/', async (req, res) => {
 })
 
 // GET - new flight page (ADMIN)
-router.get('/new', (req, res) => {
+router.get('/new', async (req, res) => {
     // if user is not admin, redirect to home page and stop process
     if (isAdminUser(req.session.user) === false) {
         res.render('errors/notFound.ejs');
         return;
     }
+
     res.render('flights/new.ejs');
 })
 

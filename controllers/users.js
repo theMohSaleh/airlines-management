@@ -17,8 +17,6 @@ router.post('/:idOfUser/adminRole', async (req, res) => {
     try {
         const paramUserId = req.params.idOfUser;
         const userFound = await User.findById(paramUserId);
-        console.log(paramUserId);
-        console.log(userFound);
         
         userFound.isAdmin = true;
         await userFound.save();
@@ -32,6 +30,10 @@ router.post('/:idOfUser/adminRole', async (req, res) => {
 router.delete('/:userId/adminRole', async (req, res) => {
     try {
         const userId = req.params.userId;
+        if (req.session.user._id === userId) {
+            res.send('Cannot remove own admin privilege')
+            return;
+        }
         const user = await User.findById({_id: userId});
         user.isAdmin = false;
         await user.save();

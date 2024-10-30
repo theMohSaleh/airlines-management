@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <script defer src="/javascripts/getAirportData.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
   <title>Editing <%= flight.destination %></title>
 </head>
 
@@ -13,9 +15,9 @@
   <h1 class="title is-1">Edit Flight</h1>
   <form action="/flights/<%= flight._id %>?_method=PUT" method="POST">
     <label for="departure">Departure</label>
-    <input class="input" type="text" name="departure" id="departure" value="<%= flight.departure %>" required>
+    <input class="input" type="text" name="departure" id="departure" list="airportsData" value="<%= flight.departure %>" required>
     <label for="destination">Destination</label>
-    <input class="input" type="text" name="destination" id="destination" value="<%= flight.destination %>" required>
+    <input class="input" type="text" name="destination" id="destination" list="airportsData" value="<%= flight.destination %>" required>
     <label for="capacity">Capacity</label>
     <input class="input" type="number" name="capacity" id="capacity" value="<%= flight.capacity %>" required>
     <label for="date">Date</label>
@@ -25,6 +27,8 @@
     <br><br>
     <button class="button" type="submit">Edit Flight</button>
   </form>
+  <datalist id="airportsData">
+  </datalist>
 </body>
 
 </html>
