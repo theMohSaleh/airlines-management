@@ -1,3 +1,4 @@
+# Airlines Management
 ## Introduction
 
 A full-stack website with user authentication and authorization for managing and booking flights. The main features of this website is to add, view, edit and delete flights as an admin user. Then the normal user will be able to view currently added flights and their details and book for them.
@@ -134,3 +135,49 @@ Add Styling for
 | Edit   | `/flights/:flightId/edit`               | GET       |
 | Update | `/flights/:flightId`                    | PUT       |
 | Delete | `/flights/:flightId`                    | DELETE    |
+
+## 🚀 Live Demo 
+You can test a live demo of the webapp [here!](https://airlines-management-dbcdb1428ca1.herokuapp.com/)
+
+## Technologies
+ - HTML
+ - CSS
+ - Bulma (CSS Framework)
+ - Javascript
+ - MongoDB
+ - Express
+ - Node
+ - EJS (Embedded Javascript)
+ - Mongoose
+ - API
+
+ ## Attributions 
+ - [API Ninjas Airports](https://api-ninjas.com/api/airports)
+ - [Bulma (CSS Framework)](https://bulma.io/)
+
+## Screenshots
+### Home Page
+![Home Page](./assets/home-page.png)
+### Sign Up Page
+![Sign Up Page](./assets/sign-up-page.png)
+### Login Page
+![Login](./assets/login-page.png)
+### Admin Landing Page
+![Admin Landing Page](./assets/admin-look-page.png)
+### User Landing Page
+![User Landing Page](./assets/user-landingPage.png)
+### Flights Page
+![Flights Page](./assets/flights.png)
+### Show Page
+![Show Page](./assets/show-flight.png)
+### Edit Page
+![Edit Page](./assets/flight-editWeb.png)
+### Profile Page
+![Profile Page](./assets/booked-flights.png)
+### Users Page
+![Users Page](./assets/users.png)
+
+## Future Work
+- Search and filter flights 
+- Add mobile phone support
+- Validations (e.g. hide flights past date)
